@@ -22,8 +22,35 @@
 // document.body.appendChild(component2());
 
 import React from "react";
+import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 
-const root = document.querySelector("#root");
+class Test extends React.Component {
+  // static defaultProps = {
+  //   content: "I'm test"
+  // }
+  constructor(props) {
+    super(props);
+    // componentWillMount go here
+  }
+  render() {
+    return (
+      <h2>{this.props.content}</h2>
+    );
+  }
+}
 
-ReactDOM.render(<div>Hello React</div>,root);
+Test.propTypes = {
+  content: PropTypes.string.isRequired
+}
+
+Test.defaultProps = { content: "I'm test." }
+
+ReactDOM.render(
+  <div>
+    <h1>Hello React.</h1>
+    <Test/>
+    <Test content="I'm new test."/>
+  </div>,
+  document.getElementById("root")
+);

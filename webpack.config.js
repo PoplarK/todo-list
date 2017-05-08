@@ -3,7 +3,7 @@ const path = require("path");
 module.exports = {
   // entry: "./app/index.js",
   entry: {
-    "index": "./app/index.js",
+    "index": "./app/index.jsx",
     // "vendor": ["react", "react-dom"]
   },
   output: {
