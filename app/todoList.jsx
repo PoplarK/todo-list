@@ -3,6 +3,7 @@ import _ from "lodash";
 import TodoModel from "./model/todo";
 import Input from "./components/input.jsx";
 import Button from "./components/button.jsx";
+import Todo from "./todo.jsx";
 import Footer from "./footer.jsx";
 
 class TodoList extends Component {
@@ -17,6 +18,12 @@ class TodoList extends Component {
     this.state.todos.push(todo);
     this.setState(this.state);
   }
+  deleteOne = (todo) => {
+    this.state.todos = this.state.todos.filter((item)=> {
+      return item !== todo;
+    });
+    this.setState(this.state);
+  }
   render() {
     let props = {
       todoCount: this.state.todos.length,
@@ -25,8 +32,8 @@ class TodoList extends Component {
       })).length
     }
 
-    let list = _.map(this.state.todos, (todo) => {
-      return <div name={todo.getContent()}>{todo.getContent()}</div>;
+    let list = _.map(this.state.todos, (todo, index) => {
+      return <Todo key={index} id={index} todo={todo} delete={this.deleteOne}></Todo>;
     });
 
     return (
@@ -38,7 +45,9 @@ class TodoList extends Component {
           </div>
         </div>
         <div className="body">
+          <ul className="todos">
           {list}
+          </ul>
         </div>
         <Footer totalCount={props.todoCount} doneCount={props.todoDoneCount}></Footer>
       </div>
