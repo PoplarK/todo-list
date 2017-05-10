@@ -13,7 +13,7 @@ class TodoList extends Component {
       todos: []
     }
   }
-  addOne(content) {
+  addOne = (content) => {
     let todo = new TodoModel(content);
     this.state.todos.push(todo);
     this.setState(this.state);
@@ -40,7 +40,7 @@ class TodoList extends Component {
       <div className="tl-main">
         <div className="header">
           <div>
-            <Input addOne={this.addOne.bind(this)}></Input>
+            <Input addOne={this.addOne}></Input>
             <Button></Button>
           </div>
         </div>

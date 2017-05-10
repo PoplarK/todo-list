@@ -4,9 +4,8 @@ import PropTypes from "prop-types";
 class Button extends Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
   }
-  handleClick() {
+  handleClick = () => {
     window.p = this;
     console.log("test", this);
   }

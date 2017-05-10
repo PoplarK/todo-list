@@ -3,7 +3,6 @@ import React, { Component } from "react";
 class Input extends Component {
   constructor(props) {
     super(props);
-    // this.handleKeyUp = this.handleKeyUp.bind(this);
   }
   handleKeyUp = (event) => {
     if(13 === event.keyCode) {
