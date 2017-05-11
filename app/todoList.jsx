@@ -8,6 +8,7 @@ import Footer from "./footer.jsx";
 
 class TodoList extends Component {
   constructor(props) {
+    console.log("Construct Todo List");
     super(props);
     this.state = {
       todos: []
@@ -18,13 +19,29 @@ class TodoList extends Component {
     this.state.todos.push(todo);
     this.setState(this.state);
   }
+  toggleOne = (todo) => {
+    this.state.todos = this.state.todos.map((item) => {
+      if(todo === item) {
+        item.toggle();
+      }
+      return item;
+    });
+    this.setState(this.state);
+  }
   deleteOne = (todo) => {
-    this.state.todos = this.state.todos.filter((item)=> {
+    this.state.todos = this.state.todos.filter((item) => {
       return item !== todo;
     });
     this.setState(this.state);
   }
+  clearCompleted = () => {
+    this.state.todos = this.state.todos.filter((item) => {
+      return !item.isDone;
+    });
+    this.setState(this.state);
+  }
   render() {
+    console.log("Render Todo List");
     let props = {
       todoCount: this.state.todos.length,
       todoDoneCount: (_.filter(this.state.todos, (todo) => {
@@ -33,7 +50,7 @@ class TodoList extends Component {
     }
 
     let list = _.map(this.state.todos, (todo, index) => {
-      return <Todo key={index} id={index} todo={todo} delete={this.deleteOne}></Todo>;
+      return <Todo key={index} id={index} todo={todo} delete={this.deleteOne} toggle={this.toggleOne}></Todo>;
     });
 
     return (
@@ -49,7 +66,7 @@ class TodoList extends Component {
           {list}
           </ul>
         </div>
-        <Footer totalCount={props.todoCount} doneCount={props.todoDoneCount}></Footer>
+        <Footer totalCount={props.todoCount} doneCount={props.todoDoneCount} clearCompleted={this.clearCompleted}></Footer>
       </div>
     )
   }

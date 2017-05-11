@@ -1,22 +1,34 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 class Todo extends Component {
   constructor(props) {
     super(props);
+    console.log("Construct Todo Item", this.props.id, this.props.todo.content);
+    this.state = {
+      isDone: this.props.todo.isDone
+    }
   }
   handleClick = (e) => {
-    let todo = this.props.todo;
-    todo.toggle();
+    this.props.toggle(this.props.todo);
   }
   handleDelete = (e) => {
     let todo = this.props.todo;
     this.props.delete(todo);
   }
   shouldComponentUpdate(nextProps, nextState) {
-    let result = nextProps.todo !== this.props.todo;
+    // 优化 render
+    let result = false;
+    let isSameModel = this.props.todo === nextProps.todo;
+    let isSameState = this.state.isDone === nextProps.todo.isDone;
+    if(!isSameModel || !isSameState) {
+      this.state.isDone = nextProps.todo.isDone;
+      result = true;
+    }
     return result;
   }
   render() {
+    console.log("Render Todo Item", this.props.id, this.props.todo.content);
     let id = this.props.id;
     let todo = this.props.todo;
 
@@ -31,6 +43,12 @@ class Todo extends Component {
       </li>
     );
   }
+}
+Todo.propTypes = {
+  id: PropTypes.number.isRequired,
+  todo: PropTypes.object.isRequired,
+  delete: PropTypes.func.isRequired,
+  toggle: PropTypes.func.isRequired
 }
 
 export default Todo;
