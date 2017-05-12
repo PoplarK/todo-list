@@ -10,7 +10,8 @@ class TodoList extends Component {
     console.log("Construct Todo List");
     super(props);
     this.state = {
-      todos: []
+      todos: [],
+      filter: "all"
     }
   }
   addOne = (content) => {
@@ -33,8 +34,41 @@ class TodoList extends Component {
     });
     this.setState(this.state);
   }
+  getSubTodos(type) {
+    let result;
+    switch(type) {
+      case "unDone":
+        result = this.state.todos.filter(item => {
+          return !item.isDone;
+        });
+        break;
+      case "done":
+        result = this.state.todos.filter(item => {
+          return item.isDone;
+        });
+        break;
+      case "all":
+      default:
+        result = this.state.todos;
+    }
+    return result;
+  }
+  setFilter = (type) => {
+    switch(type) {
+      case "unDone":
+        this.state.filter = "unDone";
+        break;
+      case "done":
+        this.state.filter = "done";
+        break;
+      case "all":
+      default:
+        this.state.filter = "all";
+    }
+    this.setState(this.state);
+  }
   clearCompleted = () => {
-    this.state.todos = this.state.todos.filter((item) => {
+    this.state.todos = this.state.todos.filter(item => {
       return !item.isDone;
     });
     this.setState(this.state);
@@ -45,10 +79,12 @@ class TodoList extends Component {
       todoCount: this.state.todos.length,
       todoDoneCount: (_.filter(this.state.todos, (todo) => {
         return todo.isDone;
-      })).length
+      })).length,
+      filter: this.state.filter,
+      subTodos: this.getSubTodos(this.state.filter)
     }
 
-    let list = _.map(this.state.todos, (todo, index) => {
+    let list = _.map(props.subTodos, (todo, index) => {
       return <Todo key={index} id={index} todo={todo} delete={this.deleteOne} toggle={this.toggleOne}></Todo>;
     });
 
@@ -62,7 +98,10 @@ class TodoList extends Component {
           {list}
           </ul>
         </div>
-        <Footer totalCount={props.todoCount} doneCount={props.todoDoneCount} clearCompleted={this.clearCompleted}></Footer>
+        <Footer totalCount={props.todoCount} doneCount={props.todoDoneCount}
+          filter={props.filter} setFilter={this.setFilter}
+          clearCompleted={this.clearCompleted}>
+        </Footer>
       </div>
     )
   }

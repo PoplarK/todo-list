@@ -17,12 +17,11 @@ class Header extends Component {
   }
   handleClick = (event) => {
     let value = this.textInput.value;
-    if(!value) {
-      return this.textInput.focus();
-    } else {
+    if(value) {
       this.textInput.value = "";
       this.props.addOne(value);
     }
+    this.textInput.focus();
   }
   render() {
     return (

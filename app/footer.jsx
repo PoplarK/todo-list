@@ -5,6 +5,9 @@ class Footer extends Component {
     console.log("Construct Footer");
     super(props);
   }
+  handleFilter = (type) => {
+    this.props.setFilter(type);
+  }
   render() {
     console.log("Render Footer");
     let props = this.props;
@@ -17,7 +20,12 @@ class Footer extends Component {
 
     return (
       <div className="footer">
-        {props.totalCount}/{props.doneCount}
+        <div>{props.totalCount}/{props.doneCount}</div>
+        <div>
+          <div className={"all"===props.filter?"active":""} onClick={this.handleFilter.bind(this, "all")}>All</div>
+          <div className={"unDone"===props.filter?"active":""} onClick={this.handleFilter.bind(this, "unDone")}>Active</div>
+          <div className={"done"===props.filter?"active":""} onClick={this.handleFilter.bind(this, "done")}>Completed</div>
+        </div>
         {clearElement}
       </div>
     )
