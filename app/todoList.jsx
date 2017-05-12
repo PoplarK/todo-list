@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import TodoModel from "./model/todo";
-import Input from "./components/input.jsx";
-import Button from "./components/button.jsx";
+import Header from "./header.jsx";
 import Todo from "./todo.jsx";
 import Footer from "./footer.jsx";
 
@@ -56,10 +55,7 @@ class TodoList extends Component {
     return (
       <div className="tl-main">
         <div className="header">
-          <div>
-            <Input addOne={this.addOne}></Input>
-            <Button></Button>
-          </div>
+          <Header addOne={this.addOne}></Header>
         </div>
         <div className="body">
           <ul className="todos">
