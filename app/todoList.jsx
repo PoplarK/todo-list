@@ -45,7 +45,7 @@ class TodoList extends Component {
     this.setState(this.state);
   }
   deleteOne = (todo) => {
-    this.state.todos = this.state.todos.filter((item) => {
+    this.state.todos = this.state.todos.filter(item => {
       return item !== todo;
     });
     this.setState(this.state);
@@ -102,7 +102,7 @@ class TodoList extends Component {
     let allDone = props.allCount > 0 && props.doneCount === props.allCount;
 
     let list = _.map(props.subTodos, (todo, index) => {
-      return <Todo key={index} id={index} todo={todo} delete={this.deleteOne} toggle={this.toggleOne}></Todo>;
+      return <Todo key={index} id={index} todo={todo} toggle={this.toggleOne} delete={this.deleteOne}></Todo>;
     });
 
     return (
