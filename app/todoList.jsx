@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import _ from "lodash";
 import TodoModel from "./model/todo";
 import Header from "./header.jsx";
 import Todo from "./todo.jsx";
@@ -93,7 +92,7 @@ class TodoList extends Component {
     console.log("Render Todo List");
     let props = {
       allCount: this.state.todos.length,
-      doneCount: (_.filter(this.state.todos, (todo) => {
+      doneCount: (this.state.todos.filter((todo) => {
         return todo.isDone;
       })).length,
       filter: this.state.filter,
@@ -101,7 +100,7 @@ class TodoList extends Component {
     }
     let allDone = props.allCount > 0 && props.doneCount === props.allCount;
 
-    let list = _.map(props.subTodos, (todo, index) => {
+    let list = props.subTodos.map((todo, index) => {
       return <Todo key={index} id={index} todo={todo} toggle={this.toggleOne} delete={this.deleteOne}></Todo>;
     });
 
