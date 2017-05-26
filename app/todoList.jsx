@@ -105,10 +105,8 @@ class TodoList extends Component {
     });
 
     return (
-      <div className="tl-main">
-        <div className="header">
-          <Header allDone={allDone} toggleAll={this.toggleAll} addOne={this.addOne}></Header>
-        </div>
+      <div className="main">
+        <Header allDone={allDone} toggleAll={this.toggleAll} addOne={this.addOne}></Header>
         <div className="body">
           <ul className="todos">
           {list}

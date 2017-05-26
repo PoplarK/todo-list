@@ -16,8 +16,8 @@
     "webpack": "^2.5.0"
   },
   "scripts": {
-    "build": "webpack",
-    "autobuild": "webpack --watch",
+    "build": "webpack --color",
+    "autobuild": "webpack --color --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

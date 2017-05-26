@@ -26,7 +26,7 @@ class Header extends Component {
   render() {
     let props = this.props;
     return (
-      <div>
+      <div className="header">
         <input type="checkbox" checked={props.allDone} onClick={props.toggleAll}></input>
         <Input inputRef={input=>{this.textInput=input}} handleKeyUp={this.handleKeyUp}></Input>
         <Button className="primary" text="Add" handleClick={this.handleClick}></Button>

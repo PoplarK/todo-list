@@ -13,15 +13,15 @@ class Footer extends Component {
     let props = this.props;
 
     let clearElement = props.doneCount > 0 ? (
-      <div className="clear-all" onClick={props.clearCompleted}>
+      <div className="btn-clear" onClick={props.clearCompleted}>
         Clear Completed
       </div>
     ): null;
 
     return (
       <div className="footer">
-        <div>{props.totalCount}/{props.doneCount}</div>
-        <div>
+        <div className="counter">{props.totalCount}/{props.doneCount}</div>
+        <div className="actions">
           <div className={"all"===props.filter?"active":""} onClick={this.handleFilter.bind(this, "all")}>All</div>
           <div className={"unDone"===props.filter?"active":""} onClick={this.handleFilter.bind(this, "unDone")}>Active</div>
           <div className={"done"===props.filter?"active":""} onClick={this.handleFilter.bind(this, "done")}>Completed</div>
